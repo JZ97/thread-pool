@@ -76,7 +76,7 @@ public:
 
   // Submit a function to be executed asynchronously by the pool
   template<typename F, typename...Args>
-  auto submit(F&& f, Args&&... args) -> std::future<decltype(f(args...))> {
+  auto submit(F&& f, Args&&... args) -> std::future<decltype(f(args...))> {//decltype根据表达式确定类型和右值无关；auto根据右值确定，变量需要初始化
     // Create a function with bounded parameters ready to execute
     std::function<decltype(f(args...))()> func = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
     // Encapsulate it into a shared ptr in order to be able to copy construct / assign 
